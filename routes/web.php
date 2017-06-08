@@ -161,7 +161,10 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
     });
 });
 
-
-
-
-
+Route::group(['prefix'=>'api'], function () {
+    
+    Route::group(['prefix'=>'loaisanpham'], function () {
+        Route::get('danhsach','LoaiSanPhamController@apiGetLoaiSP');
+    });
+    
+});
