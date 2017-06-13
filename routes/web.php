@@ -163,8 +163,16 @@ Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function() {
 
 Route::group(['prefix'=>'api'], function () {
     
+    Route::group(['prefix'=>'sanpham'], function () {
+        Route::get('danhsach','SanPhamController@apiGetSanPhamMoi');
+    });
+    
     Route::group(['prefix'=>'loaisanpham'], function () {
         Route::get('danhsach','LoaiSanPhamController@apiGetLoaiSP');
+    });
+
+    Route::group(['prefix'=>'khuyenmai'], function () {
+        Route::get('danhsach','KhuyenMaiController@apiGetKhuyenMai');
     });
     
 });

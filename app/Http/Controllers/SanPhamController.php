@@ -161,4 +161,22 @@ class SanPhamController extends Controller
     	$hinhsanpham->save();
     	return redirect('admin/sanpham/capnhat/'.$hinhsanpham->masp);
     }
+
+    public function apiGetSanPhamMoi() 
+    {
+        $sanpham = SanPham::orderBy('created_at', 'desc')->take(10)->get();
+        $chuoijson = array();
+        foreach($sanpham as $item) {
+            array_push($chuoijson, array("id" => $item -> id,
+                                         "tensp" => $item -> tensp,
+                                         "gia" => $item -> gia,
+                                         "mota" => $item -> mota,
+                                         "maloaisp" => $item -> maloaisp,
+                                         "math" => $item -> math,
+                                         "soluong" => $item -> soluong,
+                                         "luotmua" => $item -> luotmua,
+                                         "hinhsp" => $item -> hinhsanpham -> first() -> duongdan));
+        }
+        echo json_encode($chuoijson, JSON_UNESCAPED_UNICODE);
+    }
 }

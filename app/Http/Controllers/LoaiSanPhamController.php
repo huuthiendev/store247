@@ -93,8 +93,9 @@ class LoaiSanPhamController extends Controller
     	return redirect('admin/loaisp/danhsach')->with('thongbao', 'Đã xóa thành công loại sản phẩm');
     }
 
-    public function apiGetLoaiSP(){
-        $loaisp = LoaiSanPham::all();
+    public function apiGetLoaiSP() 
+    {
+        $loaisp = LoaiSanPham::where('maloaicha','!=', null) -> get();
         return $loaisp;
     }
 }
