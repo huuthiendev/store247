@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\ThuongHieu;
+use App\ChiTietThuongHieu;
 
 class ThuongHieuController extends Controller
 {
@@ -87,5 +88,16 @@ class ThuongHieuController extends Controller
     	$thuonghieu = ThuongHieu::find($id);
     	$thuonghieu->delete();
     	return redirect('admin/thuonghieu/danhsach')->with('thongbao', 'Đã xóa thành công thương hiệu');
+    }
+
+    public function apiGetThuongHieuTheoLoai($id)
+    {
+        $dschitiet = ChiTietThuongHieu::where('maloaisp','=', $id) -> get();
+        $chuoijson = array();
+        foreach($dschitiet as $item) {
+            $thuonghieu = ThuongHieu::find($item->math);
+            array_push($chuoijson, $thuonghieu);
+        }
+        return json_encode($chuoijson, JSON_UNESCAPED_UNICODE);
     }
 }

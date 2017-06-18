@@ -69,7 +69,7 @@
                     </div>
                     <div class="form-group">
                         <label>Thương hiệu</label>
-                        <select class="form-control" name="idnsx">
+                        <select class="form-control" name="idthuonghieu">
                             @foreach($dsthuonghieu as $thuonghieu)
                                 <option 
                                     @if($sanpham->thuonghieu->id == $thuonghieu->id)

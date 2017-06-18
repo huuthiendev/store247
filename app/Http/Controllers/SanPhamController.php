@@ -164,7 +164,43 @@ class SanPhamController extends Controller
 
     public function apiGetSanPhamMoi() 
     {
-        $sanpham = SanPham::orderBy('created_at', 'desc')->take(10)->get();
+        $dssanpham = SanPham::orderBy('created_at', 'desc')->take(10)->get();
+        return $this->formatSanPham($dssanpham);
+    }
+
+    public function apiGetSanPhamTheoLoai($id)
+    {
+        $dssanpham = SanPham::where('maloaisp','=', $id) -> get();
+        return $this->formatSanPham($dssanpham);
+    }
+
+    public function apiGetSanPhamTheoLoaiTheoThuongHieu($maloaisp, $math)
+    {
+        $dssanpham = SanPham::where('maloaisp','=', $maloaisp) -> where('math','=', $math) -> get();
+        return $this->formatSanPham($dssanpham);
+    }
+
+    public function apiGetSanPhamTheoLoaiTheoGia($maloaisp, $giabd, $giakt)
+    {
+        $dssanpham = SanPham::where('maloaisp','=', $maloaisp) 
+                            -> where('gia','>=', $giabd)
+                            -> where('gia','<=', $giakt) 
+                            -> get();
+        return $this->formatSanPham($dssanpham);
+    }
+
+    public function apiGetSanPhamTheoLoaiTheoThuongHieuTheoGia($maloaisp, $math, $giabd, $giakt)
+    {
+        $dssanpham = SanPham::where('maloaisp','=', $maloaisp) 
+                            -> where('math','=', $math) 
+                            -> where('gia','>=', $giabd)
+                            -> where('gia','<=', $giakt) 
+                            -> get();
+        return $this->formatSanPham($dssanpham);
+    }
+    
+    public function formatSanPham($sanpham) 
+    {
         $chuoijson = array();
         foreach($sanpham as $item) {
             array_push($chuoijson, array("id" => $item -> id,
@@ -175,8 +211,9 @@ class SanPhamController extends Controller
                                          "math" => $item -> math,
                                          "soluong" => $item -> soluong,
                                          "luotmua" => $item -> luotmua,
-                                         "hinhsp" => $item -> hinhsanpham -> first() -> duongdan));
+                                         "hinhsp" => $item -> hinhsanpham -> first() -> duongdan,
+                                         "ngaydang" => $item -> created_at -> timestamp));
         }
-        echo json_encode($chuoijson, JSON_UNESCAPED_UNICODE);
+        return json_encode($chuoijson, JSON_UNESCAPED_UNICODE);
     }
 }

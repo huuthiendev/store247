@@ -165,10 +165,21 @@ Route::group(['prefix'=>'api'], function () {
     
     Route::group(['prefix'=>'sanpham'], function () {
         Route::get('danhsach','SanPhamController@apiGetSanPhamMoi');
+        Route::get('sanphamtheoloai/{id}','SanPhamController@apiGetSanPhamTheoLoai');
+        Route::get('sanphamtheoloaitheothuonghieu/{maloaisp}/{math}',
+            'SanPhamController@apiGetSanPhamTheoLoaiTheoThuongHieu');
+        Route::get('sanphamtheoloaitheogia/{maloaisp}/{giabd}/{giakt}',
+            'SanPhamController@apiGetSanPhamTheoLoaiTheoGia');
+        Route::get('sanphamtheoloaitheothuonghieutheogia/{maloaisp}/{math}/{giabd}/{giakt}',
+            'SanPhamController@apiGetSanPhamTheoLoaiTheoThuongHieuTheoGia');
     });
     
     Route::group(['prefix'=>'loaisanpham'], function () {
         Route::get('danhsach','LoaiSanPhamController@apiGetLoaiSP');
+    });
+
+    Route::group(['prefix'=>'thuonghieu'], function () {
+        Route::get('thuonghieutheoloai/{id}','ThuongHieuController@apiGetThuongHieuTheoLoai');
     });
 
     Route::group(['prefix'=>'khuyenmai'], function () {
