@@ -198,6 +198,12 @@ class SanPhamController extends Controller
                             -> get();
         return $this->formatSanPham($dssanpham);
     }
+
+    public function apiGetHinhSanPham($id)
+    {
+        $hinhsp = HinhSanPham::where('masp','=', $id) -> get();
+        return $hinhsp;
+    }
     
     public function formatSanPham($sanpham) 
     {

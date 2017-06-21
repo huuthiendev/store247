@@ -172,6 +172,7 @@ Route::group(['prefix'=>'api'], function () {
             'SanPhamController@apiGetSanPhamTheoLoaiTheoGia');
         Route::get('sanphamtheoloaitheothuonghieutheogia/{maloaisp}/{math}/{giabd}/{giakt}',
             'SanPhamController@apiGetSanPhamTheoLoaiTheoThuongHieuTheoGia');
+        Route::get('hinhsanpham/{id}','SanPhamController@apiGetHinhSanPham');   
     });
     
     Route::group(['prefix'=>'loaisanpham'], function () {
